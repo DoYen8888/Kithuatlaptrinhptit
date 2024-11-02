@@ -1,2 +1,2 @@
-# c-
-kithuatlaptrinhptit
+KiThuatLapTrinhPit
+NgonNguC++
