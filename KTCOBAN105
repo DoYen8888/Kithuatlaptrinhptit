@@ -1,0 +1,31 @@
+
+// gan day
+
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		ll n;
+		cin>>n;
+		vector<ll> a(n);	
+		for(int i=0;i<n;i++){
+			cin>>a[i];
+		}
+		 ll pro = 0; 
+		priority_queue<int,vector<int>,greater<int>> re(a.begin(),a.end());
+
+		while(re.size()>1){	
+		ll digit1 = re.top(); re.pop();
+		ll digit2 = re.top(); re.pop();
+		pro += digit1 + digit2;
+		re.push(digit1+digit2);
+	}
+
+	cout<< pro<<endl;	
+	}
+	return 0;
+}
