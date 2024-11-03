@@ -1,0 +1,42 @@
+// tim so
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+void check(ll n){
+   vector<int> prime={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47};
+   
+    vector<int> re;
+    if(n%2==0){
+    	while(n%2==0){
+    		re.push_back(2);
+    		n/=2;
+		}
+	}
+	for(int i=3;i<=sqrt(n);i+=2){
+		if(n%i==0){
+			while(n%i==0){
+				re.push_back(i);
+				n/=i;
+			}
+		}
+	}
+	if(n>2) re.push_back(n);
+	sort(re.begin(),re.end(),greater<int>());
+	
+    ll mul =1;
+    ll id =0;
+    for(const auto&i:re){
+    	mul*=pow(prime[id],i-1);
+    	id++;
+	}
+    cout<<mul<<endl;   
+}
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		ll n;
+		cin>>n;
+		check(n);
+	}
+}
