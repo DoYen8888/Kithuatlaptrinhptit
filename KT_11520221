@@ -1,0 +1,86 @@
+// luy thua ma tran 2
+#include <bits/stdc++.h>
+#define ll long long
+const long long mod = 1e9 + 7;
+using namespace std;
+
+
+void mul(ll a[10][10], ll b[10][10], ll c[10][10], ll n) {
+    ll temp[10][10] = {0}; 
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            temp[i][j] = 0;
+            for (int k = 0; k < n; k++) {
+                temp[i][j] = (temp[i][j] + a[i][k] * b[k][j] % mod) % mod;
+            }
+        }
+    }
+
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            c[i][j] = temp[i][j];
+        }
+    }
+}
+
+
+void matrix(ll a[10][10], ll result[10][10], ll n, ll k) {
+   
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            result[i][j] = (i == j) ? 1 : 0;
+        }
+    }
+
+    ll temp[10][10];
+    while (k > 0) {
+        if (k % 2 == 1) { 
+            mul(result, a, temp, n);
+            
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    result[i][j] = temp[i][j];
+                }
+            }
+        }
+        mul(a, a, temp, n);
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                a[i][j] = temp[i][j];
+            }
+        }
+        k /= 2;
+    }
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        ll n, k;
+        cin >> n >> k;
+        ll a[10][10], result[10][10];
+
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cin >> a[i][j];
+            }
+        }
+
+       
+        matrix(a, result, n, k);
+
+       
+        ll sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum = (sum + result[i][n - 1 - i]) % mod;
+        }
+
+        cout << sum << endl;
+    }
+    return 0;
+}
