@@ -1,0 +1,43 @@
+// bieu dien so N duoi dang tong cac so fibonacci khong lap lai
+#include <bits/stdc++.h>
+using namespace std;
+
+
+vector<int> Fibonacci(int a) {
+    vector<int> fib= {1, 2};
+    while (true) {
+        int next= fib.back() + fib[fib.size() - 2];
+        if (next > a) break;
+        fib.push_back(next);
+    }
+    return fib;
+}
+
+vector<int> cnt(int a, const vector<int>& fib) {
+    vector<int> dp(a+ 1, 0);
+    dp[0] = 1; 
+
+    for (int f : fib) {
+        for (int i = 	a; i >= f; --i) {
+            dp[i] += dp[i - f];
+        }
+    }
+    return dp;
+}
+
+int main() {
+    int t;
+    cin >> t;  
+   while(t--){
+   int a;
+   cin>>a;
+   
+    vector<int> fib = Fibonacci(a);
+    
+    vector<int> dp = cnt(a, fib);
+    
+        cout << dp[a] << endl;
+    }
+
+    return 0;
+}
