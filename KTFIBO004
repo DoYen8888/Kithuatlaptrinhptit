@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> FIBO( int a){
+	vector<int> fb = {0,1};
+	while(true){
+		int next = fb.back() + fb[fb.size()-2];
+		if(next>a) break;
+		fb.push_back(next);
+	}
+	return fb;
+}
+
+void result(int a, const vector<int>&pre){
+	unordered_set<int> f(pre.begin(),pre.end());
+
+	for(int i : pre){
+		int k = a -i;
+		if(f.find(k)!=f.end()&&k!=i){
+			cout<<i<<" "<<k<<endl;
+			return;
+		}
+	}
+	cout<<"-1"<<endl;
+}
+
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		
+		int a;
+		cin>>a;
+		vector<int> pre = FIBO(a);
+		result(a,pre);
+	}
+	
+	return 0;
+}
