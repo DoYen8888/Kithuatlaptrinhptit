@@ -1,0 +1,43 @@
+
+// su dung chia de chi
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void Fib(int n, int k) {
+    
+    vector<long long> fibLength(93, 0);
+    
+    fibLength[1] = 1;  
+    fibLength[2] = 1;  
+    
+    for (int i = 3; i <= n; i++) {
+        fibLength[i] = fibLength[i - 2] + fibLength[i - 1];
+    }
+    
+    while (n > 2) {
+        if (k <= fibLength[n - 2]) { 
+            n = n - 2;
+        } else {
+            k -= fibLength[n - 2];  
+            n = n - 1;
+        }
+    }
+    
+    if (n == 1) {
+        cout << "A" << endl; 
+    } else {
+        cout << "B" << endl; 
+    }
+}
+
+int main() {
+    int t;
+    cin >> t;  
+    while (t--) {
+        int n, k;
+        cin >> n >> k; 
+        Fib(n, k);  
+    }
+    return 0;
+}
