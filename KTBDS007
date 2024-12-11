@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<long long> v;
+
+void check(long long n){
+	long long i =0;
+	long long a = 1;
+
+	while(a<=n){
+	v.push_back(a);
+		i++;
+		a= pow(2,i);
+	}
+}
+
+long long res(long long n){
+	vector<long long> dp(n+1,0);
+	dp[0]=1;
+	for(auto x:v){
+		for(int j =x;j<=n;j++){
+			dp[j]+=dp[j-x];
+		}
+}
+    return dp[n];
+}
+
+int main(){
+	long long t;
+	cin>>t;
+	while(t--){
+		long long n;
+		cin>>n;
+		v.clear();
+		check(n);
+		cout<<res(n)<<endl;
+	}
+	return 0;
+}
