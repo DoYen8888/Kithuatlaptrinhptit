@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	int t;
+	cin>>t;
+	while(t--){
+		int n;
+		cin>>n;
+		priority_queue<int,vector<int>,greater<int>> Q;
+		for(int i=0;i<n;i++){
+		  int x;
+		  cin>>x;
+		  Q.push(x);	   
+		}
+		long long ans =0;
+		while(Q.size()>1){
+			long long a = Q.top();Q.pop();
+			long long b = Q.top();Q.pop();
+			ans += a+b;
+			Q.push(a+b);	
+		}
+		cout<<ans<<endl;
+		
+		
+	}
+}
