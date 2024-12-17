@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define mod 1000000007
+using namespace std;
+
+ll exponent(ll a, ll n) {
+	if(n==0) return 1;
+	if(a==0) return 0;
+    ll ans = 1;     
+    a = a % mod;    
+
+    while (n > 0) {
+        if (n % 2 == 1) {        
+            ans = (ans * a) % mod;
+        }
+        a = (a * a) % mod;      
+        n /= 2;                 
+    }
+
+    return ans;
+}
+
+int main() {
+    int t;
+    cin >> t; 
+    while (t--) {
+        ll a, n;
+        cin >> a >> n;
+        cout << exponent(a, n) << endl; 
+    }
+    return 0;
+}
