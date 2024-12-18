@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>  // ko hoan vi
+using namespace std;
+
+long long check(long long n, long long m) {
+   
+    vector<long long> powers;
+    long long power = 1;
+    while (power <= n) {
+        powers.push_back(power);
+        power *= m;  
+    }
+    vector<long long> dp(n + 1, 0);
+    dp[0] = 1;  
+    for (long long p : powers) {  
+        for (long long i = p; i <= n; i++) {
+            dp[i] += dp[i - p]; 
+        }
+    }
+
+    return dp[n]; 
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        long long n, m;
+        cin >> n >> m;
+        cout << check(n, m) << endl;  
+    }
+    return 0;
+}
