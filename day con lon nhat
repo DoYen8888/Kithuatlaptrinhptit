@@ -1,0 +1,18 @@
+//thuat toan kadane
+//day con lon nhat
+
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+	vector<int> a={-2,11,-4,13,-5,2};
+	int sum = 0;
+	int tem =-1e9;
+	for(int i=0;i<a.size();i++){
+		sum+=a[i];
+		tem=max(sum,tem);
+		if(sum<0) sum =0;
+	}
+	cout<<tem<<endl;
+	return 0;
+	
+}
