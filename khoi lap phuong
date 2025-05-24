@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+long long ketQua = -1;
+
+// Hàm kiểm tra số lập phương
+bool laLapPhuong(long long x) {
+    long long goc = round(cbrt(x));
+    return goc * goc * goc == x;
+}
+
+// Hàm đệ quy tạo tất cả chuỗi con giữ nguyên thứ tự
+void taoTapCon(const string& N, int index, string hienTai) {
+    if (!hienTai.empty()) {
+        if (hienTai[0] != '0') {  // Không xét số bắt đầu bằng 0
+            long long so = stoll(hienTai);
+            if (laLapPhuong(so)) {
+                ketQua = max(ketQua, so);
+            }
+        }
+    }
+
+    // Duyệt các chữ số còn lại
+    for (int i = index; i < N.size(); ++i) {
+        taoTapCon(N, i + 1, hienTai + N[i]);
+    }
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        string N;
+        cin >> N;
+        ketQua = -1;
+
+        // Gọi hàm đệ quy bắt đầu từ vị trí 0, với chuỗi rỗng
+        taoTapCon(N, 0, "");
+
+        cout << ketQua << '\n';
+    }
+
+    return 0;
+}
