@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct CongViec {
+    int ma, thoiHan, loiNhuan;
+};
+
+// Sắp xếp theo lợi nhuận giảm dần
+bool cmp(CongViec a, CongViec b) {
+    return a.loiNhuan > b.loiNhuan;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int N;
+        cin >> N;
+
+        vector<CongViec> danhSach(N);
+        int thoiGianToiDa = 0;
+
+        for (int i = 0; i < N; i++) {
+            cin >> danhSach[i].ma >> danhSach[i].thoiHan >> danhSach[i].loiNhuan;
+            thoiGianToiDa = max(thoiGianToiDa, danhSach[i].thoiHan);
+        }
+
+        sort(danhSach.begin(), danhSach.end(), cmp);
+
+        vector<bool> daDung(thoiGianToiDa + 1, false); // chỉ số từ 1 đến thoiHan
+        int soCongViec = 0, tongLoiNhuan = 0;
+
+        for (auto &cv : danhSach) {
+            for (int tg = cv.thoiHan; tg >= 1; tg--) {
+                if (!daDung[tg]) {
+                    daDung[tg] = true;
+                    soCongViec++;
+                    tongLoiNhuan += cv.loiNhuan;
+                    break;
+                }
+            }
+        }
+
+        cout << soCongViec << " " << tongLoiNhuan << "\n";
+    }
+
+    return 0;
+}
